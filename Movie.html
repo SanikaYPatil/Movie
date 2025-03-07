@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎬 Movie Collection</title>
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
         * {
             box-sizing: border-box;
@@ -15,14 +12,13 @@
             padding: 0;
             font-family: 'Poppins', sans-serif;
         }
-
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #fff;
             padding: 2rem;
+            text-align: center;
         }
-
         .container {
             max-width: 900px;
             margin: auto;
@@ -31,20 +27,15 @@
             backdrop-filter: blur(15px);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.2);
         }
-
         h1 {
             font-size: 2.5rem;
             font-family: 'Orbitron', sans-serif;
             background: linear-gradient(to right, #ff00ff, #00ffff);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
         }
-
         .input-group {
             display: flex;
             flex-wrap: wrap;
@@ -52,74 +43,56 @@
             justify-content: center;
             margin-top: 1rem;
         }
-
-        input, select {
+        input, select, button {
             padding: 0.75rem;
-            border: none;
             border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+        input, select {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
-            font-size: 1rem;
             flex: 1;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
         input:focus, select:focus {
             outline: none;
-            border-color: #ff00ff;
+            border: 1px solid #ff00ff;
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
-
         button {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
             text-transform: uppercase;
             color: #fff;
             border: 2px solid transparent;
+            transition: all 0.3s ease;
         }
-
         #btn { background: linear-gradient(to right, #00c6ff, #0072ff); }
         #btn2 { background: linear-gradient(to right, #ff00ff, #ff4b2b); }
         #btn3 { background: linear-gradient(to right, #f7971e, #ffd200); }
-
         button:hover {
             transform: translateY(-3px);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
-
         .movie-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
             margin-top: 2rem;
         }
-
         .movie-card {
             background: rgba(255, 255, 255, 0.1);
             padding: 1rem;
             border-radius: 10px;
-            transition: all 0.3s ease;
             position: relative;
             border: 2px solid transparent;
-            text-align: left;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
-
         .movie-card:hover {
             transform: scale(1.05);
             border-color: #00c6ff;
-            box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
         }
-
-        .fav { 
-            border-left: 5px solid gold;
-        }
-
+        .fav { border-left: 5px solid gold; }
         .remove-btn {
             background: none;
             color: #ff00ff;
@@ -129,41 +102,22 @@
             right: 10px;
             cursor: pointer;
         }
-
-        .remove-btn:hover {
-            transform: scale(1.2);
-        }
-
-        .genre {
+        .genre, .rating {
+            display: inline-block;
             font-size: 0.9rem;
             background: rgba(255, 255, 255, 0.2);
             padding: 5px;
             border-radius: 5px;
             margin-top: 5px;
-            display: inline-block;
-            color: #ffcc00;
         }
-
-        .rating {
-            font-size: 1rem;
-            color: gold;
-        }
-
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
-            }
-        }
+        .rating { color: gold; }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>🎬 Movie Collection</h1>
-        
         <div class="input-group">
-            <input type="text" id="movieName" placeholder="Enter movie name..." required>
-            
+            <input type="text" id="movieName" placeholder="Enter movie name...">
             <select id="genre">
                 <option value="Action">Action</option>
                 <option value="Comedy">Comedy</option>
@@ -171,12 +125,10 @@
                 <option value="Horror">Horror</option>
                 <option value="Sci-Fi">Sci-Fi</option>
             </select>
-            
             <select id="favSelect">
                 <option value="no">Not Favorite</option>
                 <option value="yes">Mark as Favorite</option>
             </select>
-
             <select id="rating">
                 <option value="⭐">⭐</option>
                 <option value="⭐⭐">⭐⭐</option>
@@ -185,29 +137,48 @@
                 <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
             </select>
         </div>
-
         <div class="button-group">
             <button id="btn" onclick="addMovie()">Add Movie</button>
             <button id="btn2" onclick="removeLastMovie()">Remove Last</button>
             <button id="btn3" onclick="clearAll()">Clear All</button>
         </div>
-
-        <div class="total-movies" id="totalMovies">Total Movies: 0</div>
+        <div id="totalMovies">Total Movies: 0</div>
     </div>
-
+    
     <div class="container">
         <h2>🎥 Movie List</h2>
-        <div class="total-movies" id="displayTotalMovies">Total Movies: 0</div>
+        <div id="displayTotalMovies">Total Movies: 0</div>
         <div class="movie-list" id="displayList"></div>
     </div>
 
     <script>
         let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
+        function updateMovieCount() {
+            document.getElementById("totalMovies").innerText = `Total Movies: ${movies.length}`;
+            document.getElementById("displayTotalMovies").innerText = `Total Movies: ${movies.length}`;
+        }
+
+        function displayMovies() {
+            const movieList = document.getElementById("displayList");
+            movieList.innerHTML = "";
+            movies.forEach((movie, index) => {
+                let movieCard = document.createElement("div");
+                movieCard.className = `movie-card ${movie.favorite ? "fav" : ""}`;
+                movieCard.innerHTML = `
+                    <span class="remove-btn" onclick="removeMovie(${index})">&times;</span>
+                    <h3>${movie.name}</h3>
+                    <div class="genre">${movie.genre}</div>
+                    <div class="rating">${movie.rating}</div>
+                `;
+                movieList.appendChild(movieCard);
+            });
+        }
+
         function addMovie() {
             let movieName = document.getElementById("movieName").value.trim();
-            let favStatus = document.getElementById("favSelect").value;
             let genre = document.getElementById("genre").value;
+            let favStatus = document.getElementById("favSelect").value === "yes";
             let rating = document.getElementById("rating").value;
 
             if (!movieName) {
@@ -215,246 +186,26 @@
                 return;
             }
 
-            movies.push({ name: movieName, favorite: favStatus === "yes", genre, rating });
+            movies.push({ name: movieName, favorite: favStatus, genre, rating });
             localStorage.setItem("movies", JSON.stringify(movies));
+
             document.getElementById("movieName").value = "";
             updateMovieCount();
             displayMovies();
         }
 
-        function removeLastMovie() {
-            if (movies.length > 0) {
-                movies.pop();<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎬 Movie Collection</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-family: 'Orbitron', sans-serif;
-            background: linear-gradient(to right, #ff00ff, #00ffff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
-        }
-
-        .input-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        input, select {
-            padding: 0.75rem;
-            border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            font-size: 1rem;
-            flex: 1;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #ff00ff;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-        }
-
-        button {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            color: #fff;
-            border: 2px solid transparent;
-        }
-
-        #btn { background: linear-gradient(to right, #00c6ff, #0072ff); }
-        #btn2 { background: linear-gradient(to right, #ff00ff, #ff4b2b); }
-        #btn3 { background: linear-gradient(to right, #f7971e, #ffd200); }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-        }
-
-        .movie-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .movie-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            position: relative;
-            border: 2px solid transparent;
-            text-align: left;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05);
-            border-color: #00c6ff;
-            box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
-        }
-
-        .fav { 
-            border-left: 5px solid gold;
-        }
-
-        .remove-btn {
-            background: none;
-            color: #ff00ff;
-            font-size: 1.2rem;
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-        }
-
-        .remove-btn:hover {
-            transform: scale(1.2);
-        }
-
-        .genre {
-            font-size: 0.9rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px;
-            border-radius: 5px;
-            margin-top: 5px;
-            display: inline-block;
-            color: #ffcc00;
-        }
-
-        .rating {
-            font-size: 1rem;
-            color: gold;
-        }
-
-        @media (max-width: 600px) {
-            .input-group {
-                flex-direction: column;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>🎬 Movie Collection</h1>
-        
-        <div class="input-group">
-            <input type="text" id="movieName" placeholder="Enter movie name..." required>
-            
-            <select id="genre">
-                <option value="Action">Action</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Drama">Drama</option>
-                <option value="Horror">Horror</option>
-                <option value="Sci-Fi">Sci-Fi</option>
-            </select>
-            
-            <select id="favSelect">
-                <option value="no">Not Favorite</option>
-                <option value="yes">Mark as Favorite</option>
-            </select>
-
-            <select id="rating">
-                <option value="⭐">⭐</option>
-                <option value="⭐⭐">⭐⭐</option>
-                <option value="⭐⭐⭐">⭐⭐⭐</option>
-                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
-                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
-            </select>
-        </div>
-
-        <div class="button-group">
-            <button id="btn" onclick="addMovie()">Add Movie</button>
-            <button id="btn2" onclick="removeLastMovie()">Remove Last</button>
-            <button id="btn3" onclick="clearAll()">Clear All</button>
-        </div>
-
-        <div class="total-movies" id="totalMovies">Total Movies: 0</div>
-    </div>
-
-    <div class="container">
-        <h2>🎥 Movie List</h2>
-        <div class="total-movies" id="displayTotalMovies">Total Movies: 0</div>
-        <div class="movie-list" id="displayList"></div>
-    </div>
-
-    <script>
-        let movies = JSON.parse(localStorage.getItem("movies")) || [];
-
-        function addMovie() {
-            let movieName = document.getElementById("movieName").value.trim();
-            let favStatus = document.getElementById("favSelect").value;
-            let genre = document.getElementById("genre").value;
-            let rating = document.getElementById("rating").value;
-
-            if (!movieName) {
-                alert("Enter a movie name!");
-                return;
-            }
-
-            movies.push({ name: movieName, favorite: favStatus === "yes", genre, rating });
+        function removeMovie(index) {
+            movies.splice(index, 1);
             localStorage.setItem("movies", JSON.stringify(movies));
-            document.getElementById("movieName").value = "";
             updateMovieCount();
             displayMovies();
         }
 
         function removeLastMovie() {
-            if (movies.length > 0) {
-                movies.pop();
-                localStorage.setItem("movies", JSON.stringify(movies));
-                updateMovieCount();
-                displayMovies();
-            }
+            movies.pop();
+            localStorage.setItem("movies", JSON.stringify(movies));
+            updateMovieCount();
+            displayMovies();
         }
 
         function clearAll() {
@@ -466,14 +217,8 @@
             }
         }
 
-        function updateMovieCount() {
-            document.getElementById("totalMovies").innerText = `Total Movies: ${movies.length}`;
-            document.getElementById("displayTotalMovies").innerText = `Total Movies: ${movies.length}`;
-        }
-
         displayMovies();
         updateMovieCount();
     </script>
-
 </body>
-</html>￼Enter
+</html>
